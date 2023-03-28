@@ -3,6 +3,7 @@ var myWidth=window.innerWidth;
 var myHeight=window.innerHeight;
 var myBg=document.querySelector('body');
 
+
 document.addEventListener('resize',function(){
     myWidth=myBg.width
     myHeight=myBg.height
@@ -11,40 +12,69 @@ document.addEventListener('resize',function(){
 })
 btn.addEventListener('click',start);
 btn.addEventListener('touch',start);
-var imgs=["./imgs/dogL1.gif","./imgs/dogL2.gif",
-"./imgs/dogR1.gif","./imgs/dogR2.gif","./imgs/dogR3.gif"];
+
+var imgs=["./imgsLeft/dogL1.gif","./imgsLeft/dogL2.gif","./imgsLeft/dogR1.gif","./imgsLeft/dogR2.gif","./imgsLeft/dogR3.gif"];
+var imgsLeft=["./imgsLeft/dogL1.gif","./imgsLeft/dogL2.gif"];
+var imgsRight=["./imgsLeft/dogR1.gif","./imgsLeft/dogR2.gif","./imgsLeft/dogR3.gif"];
 
 function start(){
     move();
 }
 function move(){ //강아지 한마리 일단 나와서 이동
-    // alert(imgs[0]);
+    // alert(imgsLeft[0]);
     var img=document.createElement("img");
-    var j= Math.floor(Math.random()*5);
-    img.src=imgs[j];
+    var j= Math.floor(Math.random()*2);
+    img.src=imgsLeft[j];
     console.log("first img =",j);
-    img.style.width="40%";
-    img.style.height="50%";
+    img.style.width="80px";
+    img.style.height="100px";
     document.body.appendChild(img);
-    img.classList.add("go");    
-    console.log(img.classList.contains("go")); //true
-    document.addEventListener('touchend',touch);
+    document.addEventListener('touchstart',touch);
+    goLeft(img,-myWidth);
 }
 function touch(e){
     //터치 좌표 기준 강아지 이동 
     var img=document.createElement("img");
-    img.style.width="40%";
-    img.style.height="50%";
+    img.style.width="80px";
+    img.style.height="100px";
     document.body.appendChild(img);
     var i= Math.floor(Math.random()*5);
     img.src=imgs[i];
-
+    
+    var imgX=(e.changedTouches[0].clientX)-img.width/2;
+    var imgY=-img.height/10+e.changedTouches[0].clientY;
     img.style.position="absolute";
-    img.style.top=e.myBg.offsetTop+'px';   
-    img.style.left=myBg.offsetLeft+'px'; 
+    img.style.top=imgY+'px';   
+    img.style.left=imgX+'px'; 
+    
     console.log("second img =",i);
-    console.log("left: "+parseInt(img.style.left));
-    console.log("top: "+parseInt(img.style.top));
-    // img.classList.add("go");
-    // console.log(img.classList.contains("go")); //true
+    console.log("imgX: "+parseInt(img.style.left));
+    console.log("touchX: "+e.changedTouches[0].clientX);
+    console.log("imgY: "+parseInt(img.style.top));
+    console.log("touchY: "+e.changedTouches[0].clientY);
+    // console.log(img.style.left);
+
+    goLeft(img, -myWidth);
+}
+
+function goLeft(img,to){
+    img.animate({
+        marginLeft: [ to + "px"]
+    }, {
+        duration: 4000,
+        easing: "ease",
+        iterations: 1,
+        fill: "both"
+    });
+}
+
+function goRight(img,to){
+    img.animate({
+        marginLeft: [ to + "px"]
+    }, {
+        duration: 4000,
+        easing: "ease",
+        iterations: 1,
+        fill: "both"
+    });
 }

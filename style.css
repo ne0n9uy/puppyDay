@@ -37,3 +37,16 @@ button:hover{
     transition-delay: 1s;
     overflow: hidden;
 } */
+img{
+    animation-name: a;
+    animation-duration: 2s;
+    animation-iteration-count:1;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+
+
+
+
