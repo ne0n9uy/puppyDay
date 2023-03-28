@@ -13,11 +13,11 @@ document.addEventListener('resize',function(){
 btn.addEventListener('click',start);
 btn.addEventListener('touch',start);
 
-var imgs=["./imgsLeft/dogL1.gif","./imgsLeft/dogL2.gif","./imgsLeft/dogR1.gif","./imgsLeft/dogR2.gif","./imgsLeft/dogR3.gif"];
-var imgsLeft=["./imgsLeft/dogL1.gif","./imgsLeft/dogL2.gif"];
-var imgsRight=["./imgsLeft/dogR1.gif","./imgsLeft/dogR2.gif","./imgsLeft/dogR3.gif"];
+var imgs=["./imgs/dogL1.gif","./imgs/dogL2.gif","./imgs/dogR1.gif","./imgs/dogR2.gif","./imgs/dogR3.gif"];
+var imgsLeft=["./imgs/dogL1.gif","./imgs/dogL2.gif"];
+var imgsRight=["./imgs/dogR1.gif","./imgs/dogR2.gif","./imgs/dogR3.gif"];
 
-function start(){
+function start(){ //btn 클릭 시
     move();
 }
 function move(){ //강아지 한마리 일단 나와서 이동
@@ -47,7 +47,7 @@ function touch(e){
     img.style.top=imgY+'px';   
     img.style.left=imgX+'px'; 
     
-    console.log("second img =",i);
+    console.log("next img =",i);
     console.log("imgX: "+parseInt(img.style.left));
     console.log("touchX: "+e.changedTouches[0].clientX);
     console.log("imgY: "+parseInt(img.style.top));
