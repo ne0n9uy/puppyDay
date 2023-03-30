@@ -3,7 +3,6 @@ var myWidth=window.innerWidth;
 var myHeight=window.innerHeight;
 var myBg=document.querySelector('body');
 
-
 document.addEventListener('resize',function(){
     myWidth=myBg.width
     myHeight=myBg.height
@@ -30,7 +29,7 @@ function move(){ //강아지 한마리 일단 나와서 이동
     img.style.height="100px";
     document.body.appendChild(img);
     document.addEventListener('touchstart',touch);
-    goLeft(img,-myWidth);
+    goLeft(img,-myWidth-img.width);
 }
 function touch(e){
     //터치 좌표 기준 강아지 이동 
@@ -39,7 +38,7 @@ function touch(e){
     img.style.height="100px";
     document.body.appendChild(img);
     var i= Math.floor(Math.random()*5);
-    img.src=imgs[i];
+    img.src=imgs[i]; //0,1: Left 2,3,4: Right  
     
     var imgX=(e.changedTouches[0].clientX)-img.width/2;
     var imgY=-img.height/10+e.changedTouches[0].clientY;
@@ -52,27 +51,27 @@ function touch(e){
     console.log("touchX: "+e.changedTouches[0].clientX);
     console.log("imgY: "+parseInt(img.style.top));
     console.log("touchY: "+e.changedTouches[0].clientY);
-    // console.log(img.style.left);
+    console.log(imgsLeft.includes(img));
 
-    goLeft(img, -myWidth);
+    if (i<=1){goLeft(img, -myWidth-img.width);}
+    else {goRight(img,-(myWidth+img.width));}
 }
 
 function goLeft(img,to){
     img.animate({
         marginLeft: [ to + "px"]
     }, {
-        duration: 4000,
+        duration: 5000,
         easing: "ease",
         iterations: 1,
         fill: "both"
     });
 }
-
 function goRight(img,to){
     img.animate({
-        marginLeft: [ to + "px"]
+        marginRight: [to + "px"]
     }, {
-        duration: 4000,
+        duration: 5000,
         easing: "ease",
         iterations: 1,
         fill: "both"
