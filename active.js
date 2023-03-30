@@ -2,6 +2,7 @@ var btn=document.getElementById('btn');
 var myWidth=window.innerWidth;
 var myHeight=window.innerHeight;
 var myBg=document.querySelector('body');
+var sound=document.getElementById('sound');
 
 document.addEventListener('resize',function(){
     myWidth=myBg.width
@@ -30,6 +31,7 @@ function move(){ //강아지 한마리 일단 나와서 이동
     document.body.appendChild(img);
     document.addEventListener('touchstart',touch);
     goLeft(img,-myWidth-img.width);
+    sound.play();
 }
 function touch(e){
     //터치 좌표 기준 강아지 이동 
@@ -51,10 +53,11 @@ function touch(e){
     console.log("touchX: "+e.changedTouches[0].clientX);
     console.log("imgY: "+parseInt(img.style.top));
     console.log("touchY: "+e.changedTouches[0].clientY);
-    console.log(imgsLeft.includes(img));
 
     if (i<=1){goLeft(img, -myWidth-img.width);}
-    else {goRight(img,-(myWidth+img.width));}
+    else {goRight(img,myWidth+img.width);
+        console.log(44);
+}
 }
 
 function goLeft(img,to){
@@ -69,7 +72,7 @@ function goLeft(img,to){
 }
 function goRight(img,to){
     img.animate({
-        marginRight: [to + "px"]
+        marginLeft: [to + "px"],
     }, {
         duration: 5000,
         easing: "ease",
